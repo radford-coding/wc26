@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Cup 2026 · Family League</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <nav>
+      <a href="#games" data-nav="games">Games</a>
+      <a href="#teams" data-nav="teams">Teams</a>
+      <a href="#standings" data-nav="standings">Standings</a>
+      <a href="#schedule" data-nav="schedule">Schedule</a>
+    </nav>
+
+    <div class="status-bar">
+      <span id="status-text">Loading...</span>
+      <button class="refresh-btn" onclick="APP.fetchFromAPI().then(() => APP.render())">↻ Refresh</button>
+    </div>
+
+    <div id="view-container">
+      <div class="loading">Loading...</div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/cache.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
