@@ -576,16 +576,12 @@ nav a.active {
 }
 
 .standings-table .team-badge .flag { font-size: 0.9rem; }
-.standings-table .team-badge .status-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+.standings-table .team-badge .badge-pts {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
   margin-left: 2px;
 }
-.standings-table .team-badge .status-dot.alive { background: var(--green); }
-.standings-table .team-badge .status-dot.eliminated { background: var(--red); }
-.standings-table .team-badge .status-dot.unknown { background: var(--text-dim); }
 
 .standings-table .team-cell-wrap {
   display: flex;

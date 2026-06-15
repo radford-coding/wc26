@@ -252,7 +252,7 @@ const APP = {
 
     this.gamesByDate = {};
     for (const g of this.games) {
-      const d = g.date.slice(0, 10);
+      const d = this.pacificDateStr(g.date);
       if (!this.gamesByDate[d]) this.gamesByDate[d] = [];
       this.gamesByDate[d].push(g);
     }
@@ -330,6 +330,17 @@ const APP = {
     if (diffMin < 1) el.textContent = 'Updated just now';
     else if (diffMin < 60) el.textContent = `Updated ${diffMin}m ago`;
     else el.textContent = `Updated ${Math.floor(diffMin / 60)}h ${diffMin % 60}m ago`;
+  },
+
+  pacificDateStr(isoStr) {
+    if (!isoStr) return '';
+    const d = new Date(isoStr);
+    const parts = d.toLocaleDateString('en-US', {
+      timeZone: 'America/Los_Angeles',
+      year: 'numeric', month: '2-digit', day: '2-digit'
+    });
+    const [m, day, y] = parts.split('/');
+    return `${y}-${m}-${day}`;
   },
 
   formatPacificTime(isoStr) {
@@ -459,14 +470,12 @@ const APP = {
     </span>`;
   },
 
-  makeTeamBadge(teamApiName, status) {
+  makeTeamBadge(teamApiName, points) {
     const displayName = CONFIG.displayName(teamApiName);
-    const person = CONFIG.getPerson(teamApiName);
     const abbr = this.getTeamAbbr(teamApiName);
     const flag = CONFIG.getFlagHTML(abbr);
-    const dot = status ? `<span class="status-dot ${status}"></span>` : '';
     return `<span class="team-badge" data-team="${teamApiName}">
-      ${flag} ${displayName}${dot}
+      ${flag} ${displayName} <span class="badge-pts">${points}</span>
     </span>`;
   },
 
@@ -486,7 +495,7 @@ const APP = {
     const input = document.getElementById('game-date');
     const prevBtn = document.getElementById('date-prev');
     const nextBtn = document.getElementById('date-next');
-    const today = new Date().toISOString().slice(0, 10);
+    const today = this.pacificDateStr(new Date().toISOString());
     const clamped = today < this.datePickerMin ? this.datePickerMin :
       today > this.datePickerMax ? this.datePickerMax : today;
     input.value = params.date || clamped;
@@ -495,19 +504,15 @@ const APP = {
 
     input.addEventListener('change', () => go(input.value));
 
-    prevBtn.addEventListener('click', () => {
-      const d = new Date(input.value + 'T12:00Z');
-      d.setUTCDate(d.getUTCDate() - 1);
-      const s = d.toISOString().slice(0, 10);
-      if (s >= this.datePickerMin) go(s);
-    });
+    const shiftDay = (offset) => {
+      const [y, m, d] = input.value.split('-').map(Number);
+      const dt = new Date(y, m - 1, d + offset);
+      const s = dt.toISOString().slice(0, 10);
+      if (s >= this.datePickerMin && s <= this.datePickerMax) go(s);
+    };
 
-    nextBtn.addEventListener('click', () => {
-      const d = new Date(input.value + 'T12:00Z');
-      d.setUTCDate(d.getUTCDate() + 1);
-      const s = d.toISOString().slice(0, 10);
-      if (s <= this.datePickerMax) go(s);
-    });
+    prevBtn.addEventListener('click', () => shiftDay(-1));
+    nextBtn.addEventListener('click', () => shiftDay(1));
 
     this.renderGamesForDate(input.value);
   },
@@ -746,9 +751,9 @@ const APP = {
       </tr></thead><tbody>`;
 
     for (const r of ranked) {
-      const teamsHtml = r.teams.map(t => {
-        const status = t.eliminated ? 'eliminated' : t.alive ? 'alive' : 'unknown';
-        return this.makeTeamBadge(t.apiName, status);
+      const sorted = [...r.teams].sort((a, b) => b.points - a.points);
+      const teamsHtml = sorted.map(t => {
+        return this.makeTeamBadge(t.apiName, t.points);
       }).join('');
 
       html += `<tr>
@@ -1004,7 +1009,7 @@ const APP = {
       const isTeam2 = t2.team.displayName === selected ||
         (type === 'person' && CONFIG.getPerson(t2.team.displayName) === selected);
 
-      const gameDate = g.date.slice(0, 10);
+      const gameDate = this.pacificDateStr(g.date);
       return `<div class="schedule-item">
         <span class="schedule-date"><a href="#games?date=${gameDate}" class="date-link">${pd}</a><br><span style="font-size:0.72rem;color:var(--text-dim)">${pt}</span></span>
         <span class="schedule-status ${status}">${status === 'final' ? 'FT' : status === 'live' ? statusText : groupLabel}</span>
