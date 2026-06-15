@@ -1,3 +1,5 @@
+const THROTTLE_MS = CONFIG.cacheThrottleMinutes * 60 * 1000;
+
 const APP = {
   data: null,
   teamsMap: {},
@@ -52,9 +54,8 @@ const APP = {
   async fetchFromAPI() {
     const lastFetch = localStorage.getItem('wc_last_fetch');
     const now = Date.now();
-    const throttleMs = CONFIG.cacheThrottleMinutes * 60 * 1000;
 
-    if (lastFetch && (now - parseInt(lastFetch)) < throttleMs) {
+    if (lastFetch && (now - parseInt(lastFetch)) < THROTTLE_MS) {
       return false;
     }
 
@@ -330,6 +331,24 @@ const APP = {
     if (diffMin < 1) el.textContent = 'Updated just now';
     else if (diffMin < 60) el.textContent = `Updated ${diffMin}m ago`;
     else el.textContent = `Updated ${Math.floor(diffMin / 60)}h ${diffMin % 60}m ago`;
+
+    const btn = document.querySelector('.refresh-btn');
+    const timer = document.getElementById('refresh-timer');
+    if (!btn || !timer) return;
+
+    const lastFetch = localStorage.getItem('wc_last_fetch');
+    if (lastFetch) {
+      const elapsed = Date.now() - parseInt(lastFetch);
+      const remaining = THROTTLE_MS - elapsed;
+      if (remaining > 0) {
+        const mins = Math.ceil(remaining / 60000);
+        timer.textContent = `(${mins}m)`;
+        btn.classList.add('refresh-btn--throttled');
+      } else {
+        timer.textContent = '';
+        btn.classList.remove('refresh-btn--throttled');
+      }
+    }
   },
 
   pacificDateStr(isoStr) {

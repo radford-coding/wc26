@@ -114,9 +114,14 @@ nav a.active {
   transition: all 0.15s;
 }
 
-.status-bar .refresh-btn:hover {
+.status-bar .refresh-btn:not(.refresh-btn--throttled):hover {
   background: var(--bg-hover);
   color: var(--text);
+}
+
+.status-bar .refresh-btn--throttled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* Section title */
