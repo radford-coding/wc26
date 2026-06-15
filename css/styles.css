@@ -635,6 +635,16 @@ nav a.active {
 .schedule-item .schedule-status.live { color: var(--red); }
 .schedule-item .schedule-status.scheduled { color: var(--yellow); }
 
+.schedule-item .date-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.schedule-item .date-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .schedule-item .schedule-teams {
   flex: 1;
   display: flex;

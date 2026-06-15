@@ -1004,8 +1004,9 @@ const APP = {
       const isTeam2 = t2.team.displayName === selected ||
         (type === 'person' && CONFIG.getPerson(t2.team.displayName) === selected);
 
+      const gameDate = g.date.slice(0, 10);
       return `<div class="schedule-item">
-        <span class="schedule-date">${pd}<br><span style="font-size:0.72rem;color:var(--text-dim)">${pt}</span></span>
+        <span class="schedule-date"><a href="#games?date=${gameDate}" class="date-link">${pd}</a><br><span style="font-size:0.72rem;color:var(--text-dim)">${pt}</span></span>
         <span class="schedule-status ${status}">${status === 'final' ? 'FT' : status === 'live' ? statusText : groupLabel}</span>
         <span class="schedule-teams">
           ${this.getTeamFlagHTML(t1.team.displayName)}
