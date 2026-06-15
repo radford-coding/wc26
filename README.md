@@ -1,0 +1,1 @@
+Regenerate cache.js periodically with `python3 tools/fetch_cache.py` to keep schedule data current.

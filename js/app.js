@@ -942,22 +942,14 @@ const APP = {
 
     let options = [];
     if (type === 'team') {
-      const allTeams = new Set();
-      if (this.games) {
-        for (const g of this.games) {
-          for (const c of g.competitors) {
-            const name = c.team.displayName;
-            if (name && !/^\d/.test(name) && !name.includes('RD') && !name.includes('QF') && !name.includes('SF')) {
-              allTeams.add(name);
-            }
-          }
-        }
+      const realTeams = new Set();
+      for (const grpTeams of Object.values(this.groupsMap)) {
+        for (const t of grpTeams) realTeams.add(t);
       }
-      if (allTeams.size === 0) {
-        const fallback = CONFIG.personList.flatMap(p => CONFIG.getPersonTeams(p));
-        fallback.forEach(t => allTeams.add(t));
+      if (realTeams.size === 0) {
+        CONFIG.personList.flatMap(p => CONFIG.getPersonTeams(p)).forEach(t => realTeams.add(t));
       }
-      options = Array.from(allTeams).sort();
+      options = Array.from(realTeams).sort();
     } else {
       options = CONFIG.personList;
     }
@@ -1014,11 +1006,21 @@ const APP = {
         <span class="schedule-date"><a href="#games?date=${gameDate}" class="date-link">${pd}</a><br><span style="font-size:0.72rem;color:var(--text-dim)">${pt}</span></span>
         <span class="schedule-status ${status}">${status === 'final' ? 'FT' : status === 'live' ? statusText : groupLabel}</span>
         <span class="schedule-teams">
-          ${this.getTeamFlagHTML(t1.team.displayName)}
-          <span class="team-name ${isTeam1 ? 'highlight' : ''}" data-team="${t1.team.displayName}">${CONFIG.displayName(t1.team.displayName)}</span>
+          <span class="team-block">
+            ${this.getTeamFlagHTML(t1.team.displayName)}
+            <span class="team-info">
+              <a href="#" data-team="${t1.team.displayName}" class="team-name ${isTeam1 ? 'highlight' : ''}">${CONFIG.displayName(t1.team.displayName)}</a>
+              ${CONFIG.getPerson(t1.team.displayName) ? `<a href="#" data-person="${CONFIG.getPerson(t1.team.displayName)}" class="person-name">${CONFIG.getPerson(t1.team.displayName)}</a>` : ''}
+            </span>
+          </span>
           <span style="color:var(--text-dim)">vs</span>
-          ${this.getTeamFlagHTML(t2.team.displayName)}
-          <span class="team-name ${isTeam2 ? 'highlight' : ''}" data-team="${t2.team.displayName}">${CONFIG.displayName(t2.team.displayName)}</span>
+          <span class="team-block">
+            ${this.getTeamFlagHTML(t2.team.displayName)}
+            <span class="team-info">
+              <a href="#" data-team="${t2.team.displayName}" class="team-name ${isTeam2 ? 'highlight' : ''}">${CONFIG.displayName(t2.team.displayName)}</a>
+              ${CONFIG.getPerson(t2.team.displayName) ? `<a href="#" data-person="${CONFIG.getPerson(t2.team.displayName)}" class="person-name">${CONFIG.getPerson(t2.team.displayName)}</a>` : ''}
+            </span>
+          </span>
         </span>
         <span class="schedule-score">${s1}–${s2}</span>
       </div>`;

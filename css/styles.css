@@ -649,11 +649,27 @@ nav a.active {
   min-width: 0;
 }
 
+.schedule-item .schedule-teams .team-block {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.schedule-item .schedule-teams .team-block .team-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .schedule-item .schedule-teams .flag { font-size: 1rem; flex-shrink: 0; }
 
 .schedule-item .schedule-teams .team-name {
   cursor: pointer;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .schedule-item .schedule-teams .team-name:hover {
@@ -661,6 +677,17 @@ nav a.active {
 }
 
 .schedule-item .schedule-teams .team-name.highlight {
+  color: var(--accent);
+}
+
+.schedule-item .schedule-teams .person-name {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.schedule-item .schedule-teams .person-name:hover {
   color: var(--accent);
 }
 
