@@ -718,6 +718,7 @@ nav a.active {
   .group-table col.col-stat { width: 5%; }
   .group-table col.col-pts  { width: 7%; }
   .bracket-match { flex-wrap: wrap; }
+  .team-block span { display: flex; flex-direction: column; align-items: center; }
 }
 
 @media (max-width: 480px) {
