@@ -342,6 +342,12 @@ nav a.active {
   flex-shrink: 0;
 }
 
+.game-card .score-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .game-card .score-divider {
   font-size: 1rem;
   color: var(--text-dim);
@@ -708,6 +714,7 @@ nav a.active {
   .game-card .team-block.right { text-align: left; flex-direction: row; }
   .game-card .score-divider { display: none; }
   .game-card .game-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .game-card .score-wrapper { flex-direction: column; }
   .controls { flex-direction: column; align-items: stretch; }
   .controls select, .controls input[type="date"] { width: 100%; }
   .standings-table { font-size: 0.82rem; }
