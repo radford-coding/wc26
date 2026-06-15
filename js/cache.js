@@ -1,7 +1,7 @@
-// World Cup Cache - Generated 2026-06-15 13:24:24 UTC
+// World Cup Cache - Generated 2026-06-15 15:11:41 UTC
 // ESPN API - FIFA World Cup 2026
 var WC_CACHE = {
-  "timestamp": "2026-06-15T20:24:24.537805+00:00",
+  "timestamp": "2026-06-15T22:11:41.503306+00:00",
   "teams": {
     "ALG": {
       "id": "624",
@@ -1121,16 +1121,16 @@ var WC_CACHE = {
       "group": "FIFA World Cup, Group G",
       "venue": "Lumen Field",
       "status": {
-        "name": "STATUS_SECOND_HALF",
-        "description": "Second Half",
-        "detail": "62'",
-        "state": "in"
+        "name": "STATUS_FULL_TIME",
+        "description": "Full Time",
+        "detail": "FT",
+        "state": "post"
       },
       "competitors": [
         {
           "id": "459",
           "homeAway": "home",
-          "score": "0",
+          "score": "1",
           "winner": false,
           "team": {
             "id": "459",
@@ -1171,10 +1171,10 @@ var WC_CACHE = {
       "group": "FIFA World Cup, Group H",
       "venue": "Hard Rock Stadium",
       "status": {
-        "name": "STATUS_SCHEDULED",
-        "description": "Scheduled",
-        "detail": "Mon, June 15th at 6:00 PM EDT",
-        "state": "pre"
+        "name": "STATUS_FIRST_HALF",
+        "description": "First Half",
+        "detail": "7'",
+        "state": "in"
       },
       "competitors": [
         {
