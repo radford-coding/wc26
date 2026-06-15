@@ -475,18 +475,38 @@ const APP = {
     container.innerHTML = `<div class="view-title">Games</div>
       <div class="controls">
         <label for="game-date">Date</label>
-        <input type="date" id="game-date" min="${this.datePickerMin}" max="${this.datePickerMax}">
+        <div class="date-nav-wrap">
+          <button class="date-nav-btn" id="date-prev" aria-label="Previous day">‹</button>
+          <input type="date" id="game-date" min="${this.datePickerMin}" max="${this.datePickerMax}">
+          <button class="date-nav-btn" id="date-next" aria-label="Next day">›</button>
+        </div>
       </div>
       <div id="games-list" class="game-list"></div>`;
 
     const input = document.getElementById('game-date');
+    const prevBtn = document.getElementById('date-prev');
+    const nextBtn = document.getElementById('date-next');
     const today = new Date().toISOString().slice(0, 10);
     const clamped = today < this.datePickerMin ? this.datePickerMin :
       today > this.datePickerMax ? this.datePickerMax : today;
     input.value = params.date || clamped;
 
-    input.addEventListener('change', () => {
-      window.location.hash = `games?date=${input.value}`;
+    const go = (d) => window.location.hash = `games?date=${d}`;
+
+    input.addEventListener('change', () => go(input.value));
+
+    prevBtn.addEventListener('click', () => {
+      const d = new Date(input.value + 'T12:00Z');
+      d.setUTCDate(d.getUTCDate() - 1);
+      const s = d.toISOString().slice(0, 10);
+      if (s >= this.datePickerMin) go(s);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const d = new Date(input.value + 'T12:00Z');
+      d.setUTCDate(d.getUTCDate() + 1);
+      const s = d.toISOString().slice(0, 10);
+      if (s <= this.datePickerMax) go(s);
     });
 
     this.renderGamesForDate(input.value);
@@ -535,7 +555,7 @@ const APP = {
             ${this.teamAndPersonHTML(t2.team.displayName, { winner: t2.winner })}
           </div>
         </div>
-        ${g.venue ? `<div class="game-venue">${g.venue}</div>` : ''}
+        ${g.venue ? `<div class="game-venue">${g.venue} - </div>` : ''}
       </div>`;
     }).join('');
   },
@@ -563,6 +583,17 @@ const APP = {
       html += `<div class="group-section">
         <div class="group-title">${grpName}</div>
         <table class="group-table">
+          <colgroup>
+            <col class="col-team">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-stat">
+            <col class="col-pts">
+          </colgroup>
           <thead><tr>
             <th>Team</th>
             <th style="text-align:center">P</th>
@@ -593,14 +624,14 @@ const APP = {
               </div>
             </div>
           </td>
-          <td style="text-align:center">${t.played}</td>
-          <td style="text-align:center">${t.wins}</td>
-          <td style="text-align:center">${t.draws}</td>
-          <td style="text-align:center">${t.losses}</td>
-          <td style="text-align:center">${t.gf}</td>
-          <td style="text-align:center">${t.ga}</td>
-          <td style="text-align:center">${t.gd > 0 ? '+' : ''}${t.gd}</td>
-          <td class="pts">${t.pts}</td>
+          <td class="c-stat">${t.played}</td>
+          <td class="c-stat">${t.wins}</td>
+          <td class="c-stat">${t.draws}</td>
+          <td class="c-stat">${t.losses}</td>
+          <td class="c-stat">${t.gf}</td>
+          <td class="c-stat">${t.ga}</td>
+          <td class="c-stat">${t.gd > 0 ? '+' : ''}${t.gd}</td>
+          <td class="c-pts">${t.pts}</td>
         </tr>`;
       }
 

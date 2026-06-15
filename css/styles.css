@@ -142,6 +142,49 @@ nav a.active {
   font-weight: 500;
 }
 
+.date-nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.date-nav-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 10px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.date-nav-btn:first-child {
+  border-radius: var(--radius) 0 0 var(--radius);
+  border-right: none;
+}
+
+.date-nav-btn:last-child {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border-left: none;
+}
+
+.date-nav-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.date-nav-btn:active {
+  background: var(--bg-muted);
+}
+
+.date-nav-wrap input[type="date"] {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  min-width: 180px;
+}
+
 .controls select,
 .controls input[type="date"] {
   background: var(--bg-card);
@@ -154,6 +197,35 @@ nav a.active {
   min-width: 180px;
   cursor: pointer;
   transition: border-color 0.15s;
+  color-scheme: dark;
+}
+
+.controls input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.controls input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.controls input[type="date"]::-webkit-datetime-edit {
+  color: var(--text);
+}
+
+.controls input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  color: var(--text);
+}
+
+.controls input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.controls input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.controls input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: var(--accent-muted);
+  color: var(--accent);
+  outline: none;
+  border-radius: 2px;
 }
 
 .controls select:focus,
@@ -320,11 +392,16 @@ nav a.active {
 
 .group-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid var(--border);
   border-radius: 0 0 var(--radius) var(--radius);
   overflow: hidden;
 }
+
+.group-table col.col-team { width: auto; }
+.group-table col.col-stat { width: 6%; }
+.group-table col.col-pts  { width: 8%; }
 
 .group-table th {
   background: var(--bg-muted);
@@ -338,10 +415,12 @@ nav a.active {
   border-bottom: 1px solid var(--border);
 }
 
+.group-table th { text-align: left; }
 .group-table th.pts { text-align: center; }
 .group-table td { padding: 10px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); }
 .group-table tr:last-child td { border-bottom: none; }
-.group-table td.pts { text-align: center; font-weight: 600; font-family: var(--font-mono); }
+.group-table td.c-stat { text-align: center; font-family: var(--font-mono); font-size: 0.85rem; }
+.group-table td.c-pts { text-align: center; font-weight: 700; font-family: var(--font-mono); font-size: 0.95rem; }
 
 .group-table .team-cell {
   display: flex;
@@ -602,7 +681,9 @@ nav a.active {
   .standings-table th, .standings-table td { padding: 8px 6px; }
   .schedule-item { flex-wrap: wrap; }
   .schedule-item .schedule-date { min-width: 80px; }
-  .group-table td { padding: 8px 8px; font-size: 0.82rem; }
+  .group-table td { padding: 8px 6px; font-size: 0.82rem; }
+  .group-table col.col-stat { width: 5%; }
+  .group-table col.col-pts  { width: 7%; }
   .bracket-match { flex-wrap: wrap; }
 }
 
