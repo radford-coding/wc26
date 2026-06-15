@@ -553,14 +553,16 @@ const APP = {
           <div class="team-block">
             ${this.teamAndPersonHTML(t1.team.displayName, { winner: t1.winner })}
           </div>
-          <div class="score">${s1}</div>
-          <div class="score-divider">vs</div>
-          <div class="score">${s2}</div>
+          <div class="score-wrapper">
+            <div class="score">${s1}</div>
+            <div class="score-divider">vs</div>
+            <div class="score">${s2}</div>
+          </div>
           <div class="team-block right">
             ${this.teamAndPersonHTML(t2.team.displayName, { winner: t2.winner })}
           </div>
         </div>
-        ${g.venue ? `<div class="game-venue">${g.venue} - </div>` : ''}
+        ${g.venue ? `<div class="game-venue">${g.venue}${CONFIG.venueCities[g.venue] ? ', ' + CONFIG.venueCities[g.venue] : ''}</div>` : ''}
       </div>`;
     }).join('');
   },

@@ -65,6 +65,24 @@ const CONFIG = {
     'CRO': '🇭🇷', 'ALG': '🇩🇿', 'QAT': '🇶🇦',
     'BRA': '🇧🇷', 'AUS': '🇦🇺', 'NZL': '🇳🇿'
   },
+  venueCities: {
+    'BC Place': 'Vancouver',
+    'BMO Field': 'Toronto',
+    'Estadio Akron': 'Guadalajara',
+    'Estadio BBVA': 'Monterrey',
+    'Estadio Banorte': 'Mexico City',
+    'Mercedes-Benz Stadium': 'Atlanta',
+    'Gillette Stadium': 'Boston',
+    'AT&T Stadium': 'Dallas',
+    'NRG Stadium': 'Houston',
+    'GEHA Field at Arrowhead Stadium': 'Kansas City',
+    'SoFi Stadium': 'Los Angeles',
+    'Hard Rock Stadium': 'Miami',
+    'MetLife Stadium': 'New York',
+    'Lincoln Financial Field': 'Philadelphia',
+    "Levi's Stadium": 'San Francisco Bay Area',
+    'Lumen Field': 'Seattle'
+  },
   teamPerson: {},
   personTeamsLookup: {}
 };
