@@ -12,8 +12,8 @@
   --border: hsl(0 0% 14.9%);
   --border-active: hsl(0 0% 30%);
   --text: hsl(0 0% 93%);
-  --text-muted: hsl(0 0% 55%);
-  --text-dim: hsl(0 0% 35%);
+  --text-muted: hsl(0 0% 75%);
+  --text-dim: hsl(0 0% 55%);
   --accent: hsl(210 100% 50%);
   --accent-hover: hsl(210 100% 55%);
   --accent-muted: hsl(210 50% 20%);
@@ -51,6 +51,9 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 /* Nav */
 nav {
   display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
   gap: 2px;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
