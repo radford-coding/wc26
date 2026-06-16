@@ -79,6 +79,7 @@ const APP = {
         this.render();
         localStorage.setItem('wc_last_fetch', String(now));
       }
+      console.log("success!");
       return true;
     } catch (e) {
       console.warn('API fetch failed, using cached data');
