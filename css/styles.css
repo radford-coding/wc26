@@ -428,8 +428,8 @@ nav a.active {
   border-bottom: 1px solid var(--border);
 }
 
-.group-table th { text-align: left; }
-.group-table th.pts { text-align: center; }
+.group-table th.c-stat { text-align: center; }
+.group-table th.c-pts { text-align: center; font-weight: 700; }
 .group-table td { padding: 10px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); }
 .group-table tr:last-child td { border-bottom: none; }
 .group-table td.c-stat { text-align: center; font-family: var(--font-mono); font-size: 0.85rem; }
@@ -735,9 +735,8 @@ nav a.active {
   .standings-table th, .standings-table td { padding: 8px 6px; }
   .schedule-item { flex-wrap: wrap; }
   .schedule-item .schedule-date { min-width: 80px; }
-  .group-table td { padding: 8px 6px; font-size: 0.82rem; }
-  .group-table col.col-stat { width: 5%; }
-  .group-table col.col-pts  { width: 7%; }
+  .group-table td { padding: 8px; font-size: 0.82rem; }
+  .group-table th { padding: 8px; }
   .bracket-match { flex-wrap: wrap; }
   .team-block span { display: flex; flex-direction: column; align-items: center; }
 }

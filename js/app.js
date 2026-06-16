@@ -636,14 +636,14 @@ const APP = {
           </colgroup>
           <thead><tr>
             <th>Team</th>
-            <th style="text-align:center">P</th>
-            <th style="text-align:center">W</th>
-            <th style="text-align:center">D</th>
-            <th style="text-align:center">L</th>
-            <th style="text-align:center">GF</th>
-            <th style="text-align:center">GA</th>
-            <th style="text-align:center">GD</th>
-            <th class="pts">Pts</th>
+            <th class="c-stat">P</th>
+            <th class="c-stat">W</th>
+            <th class="c-stat">D</th>
+            <th class="c-stat">L</th>
+            <th class="c-stat">GF</th>
+            <th class="c-stat">GA</th>
+            <th class="c-stat">GD</th>
+            <th class="c-pts">Pts</th>
           </tr></thead>
           <tbody>`;
 
