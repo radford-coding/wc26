@@ -12,10 +12,8 @@ const APP = {
   datePickerMax: '2026-07-19',
 
   async init() {
+    this.loadFromCache();
     this.loadFromStorage();
-    if (!this.data) {
-      this.loadFromCache();
-    }
     this.setupRouting();
     this.render();
     await this.fetchFromAPI();
@@ -77,8 +75,9 @@ const APP = {
         this.saveToStorage(merged);
         this.processData(merged);
         this.render();
-        localStorage.setItem('wc_last_fetch', String(now));
       }
+      localStorage.setItem('wc_last_fetch', String(now));
+      this.updateStatusBar();
       console.log("success!");
       return true;
     } catch (e) {
@@ -328,22 +327,30 @@ const APP = {
   updateStatusBar() {
     const el = document.getElementById('status-text');
     if (!el) return;
-    if (!this.data || !this.data.timestamp) {
+
+    const lastFetch = localStorage.getItem('wc_last_fetch');
+    if (lastFetch) {
+      const then = new Date(parseInt(lastFetch));
+      const now = new Date();
+      const diffMin = Math.floor((now - then) / 60000);
+      if (diffMin < 1) el.textContent = 'Updated just now';
+      else if (diffMin < 60) el.textContent = `Updated ${diffMin}m ago`;
+      else el.textContent = `Updated ${Math.floor(diffMin / 60)}h ${diffMin % 60}m ago`;
+    } else if (this.data && this.data.timestamp) {
+      const then = new Date(this.data.timestamp);
+      const now = new Date();
+      const diffMin = Math.floor((now - then) / 60000);
+      if (diffMin < 1) el.textContent = 'Updated just now';
+      else if (diffMin < 60) el.textContent = `Updated ${diffMin}m ago`;
+      else el.textContent = `Updated ${Math.floor(diffMin / 60)}h ${diffMin % 60}m ago`;
+    } else {
       el.textContent = 'No cached data';
-      return;
     }
-    const then = new Date(this.data.timestamp);
-    const now = new Date();
-    const diffMin = Math.floor((now - then) / 60000);
-    if (diffMin < 1) el.textContent = 'Updated just now';
-    else if (diffMin < 60) el.textContent = `Updated ${diffMin}m ago`;
-    else el.textContent = `Updated ${Math.floor(diffMin / 60)}h ${diffMin % 60}m ago`;
 
     const btn = document.querySelector('.refresh-btn');
     const timer = document.getElementById('refresh-timer');
     if (!btn || !timer) return;
 
-    const lastFetch = localStorage.getItem('wc_last_fetch');
     if (lastFetch) {
       const elapsed = Date.now() - parseInt(lastFetch);
       const remaining = THROTTLE_MS - elapsed;
