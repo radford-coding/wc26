@@ -19,6 +19,8 @@
   --accent-muted: hsl(210 50% 20%);
   --green: hsl(142 70% 45%);
   --green-bg: hsl(142 50% 12%);
+  --green-person: hsl(142 65% 55%);
+  --green-person-hover: hsl(142 65% 68%);
   --red: hsl(0 72% 51%);
   --red-bg: hsl(0 50% 12%);
   --yellow: hsl(48 96% 53%);
@@ -29,7 +31,7 @@
   --font-mono: 'SF Mono', 'Fira Code', monospace;
 }
 
-html { font-size: 15px; }
+html { font-size: 18px; }
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -330,12 +332,12 @@ nav a.active {
 
 .game-card .team-block .person-name {
   font-size: 0.72rem;
-  color: var(--text-dim);
+  color: var(--green-person);
   cursor: pointer;
 }
 
 .game-card .team-block .person-name:hover {
-  color: var(--accent);
+  color: var(--green-person-hover);
 }
 
 .game-card .score {
@@ -443,8 +445,8 @@ nav a.active {
 .group-table .team-cell .team-info { display: flex; flex-direction: column; }
 .group-table .team-cell .team-name { font-weight: 500; cursor: pointer; color: var(--text); }
 .group-table .team-cell .team-name:hover { color: var(--accent); }
-.group-table .team-cell .person-name { font-size: 0.7rem; color: var(--text-dim); cursor: pointer; }
-.group-table .team-cell .person-name:hover { color: var(--accent); }
+.group-table .team-cell .person-name { font-size: 0.7rem; color: var(--green-person); cursor: pointer; }
+.group-table .team-cell .person-name:hover { color: var(--green-person-hover); }
 .group-table .team-row:hover { background: var(--bg-hover); }
 
 /* Knockout bracket */
@@ -500,8 +502,8 @@ nav a.active {
 .bracket-match .bracket-team .team-info { display: flex; flex-direction: column; min-width: 0; }
 .bracket-match .bracket-team .team-name { font-weight: 500; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bracket-match .bracket-team .team-name:hover { color: var(--accent); }
-.bracket-match .bracket-team .person-name { font-size: 0.68rem; color: var(--text-dim); cursor: pointer; }
-.bracket-match .bracket-team .person-name:hover { color: var(--accent); }
+.bracket-match .bracket-team .person-name { font-size: 0.68rem; color: var(--green-person); cursor: pointer; }
+.bracket-match .bracket-team .person-name:hover { color: var(--green-person-hover); }
 
 .bracket-match .bracket-score {
   font-family: var(--font-mono);
@@ -559,6 +561,13 @@ nav a.active {
 .standings-table td.person-name {
   font-weight: 600;
   white-space: nowrap;
+  color: var(--green-person);
+}
+.standings-table td.person-name a {
+  color: var(--green-person);
+}
+.standings-table td.person-name a:hover {
+  color: var(--green-person-hover);
 }
 
 .standings-table td.total-pts {
@@ -693,13 +702,13 @@ nav a.active {
 
 .schedule-item .schedule-teams .person-name {
   font-size: 0.68rem;
-  color: var(--text-dim);
+  color: var(--green-person);
   cursor: pointer;
   line-height: 1;
 }
 
 .schedule-item .schedule-teams .person-name:hover {
-  color: var(--accent);
+  color: var(--green-person-hover);
 }
 
 .schedule-item .schedule-score {
@@ -711,7 +720,7 @@ nav a.active {
 
 /* Responsive */
 @media (max-width: 640px) {
-  html { font-size: 14px; }
+  html { font-size: 17px; }
   .app-container { padding: 0 10px; }
   nav { gap: 0; }
   nav a { padding: 6px 12px; font-size: 0.82rem; }
