@@ -12,8 +12,10 @@ const APP = {
   datePickerMax: '2026-07-19',
 
   async init() {
-    this.loadFromCache();
     this.loadFromStorage();
+    if (!this.data) {
+      this.loadFromCache();
+    }
     this.setupRouting();
     this.render();
     await this.fetchFromAPI();
