@@ -128,7 +128,7 @@ const APP = {
 
       const idx = existingGames.findIndex(g => g.id === gameId);
       if (idx >= 0) {
-        existingGames[idx] = updatedGame;
+        Object.assign(existingGames[idx], updatedGame);
       } else {
         existingGames.push(updatedGame);
       }
