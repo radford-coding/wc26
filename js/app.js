@@ -51,11 +51,11 @@ const APP = {
     }
   },
 
-  async fetchFromAPI() {
+  async fetchFromAPI(force = false) {
     const lastFetch = localStorage.getItem('wc_last_fetch');
     const now = Date.now();
 
-    if (lastFetch && (now - parseInt(lastFetch)) < THROTTLE_MS) {
+    if (!force && lastFetch && (now - parseInt(lastFetch)) < THROTTLE_MS) {
       return false;
     }
 
@@ -75,9 +75,8 @@ const APP = {
         this.saveToStorage(merged);
         this.processData(merged);
         this.render();
+        localStorage.setItem('wc_last_fetch', String(now));
       }
-
-      localStorage.setItem('wc_last_fetch', String(now));
       return true;
     } catch (e) {
       console.warn('API fetch failed, using cached data');

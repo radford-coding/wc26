@@ -18,7 +18,7 @@
 
     <div class="status-bar">
       <span id="status-text">Loading...</span>
-      <button class="refresh-btn" onclick="APP.fetchFromAPI().then(() => APP.render())">↻ Refresh <span id="refresh-timer"></span></button>
+      <button class="refresh-btn" onclick="APP.fetchFromAPI(true).then(() => APP.render())">↻ Refresh <span id="refresh-timer"></span></button>
     </div>
 
     <div id="view-container">
