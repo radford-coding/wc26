@@ -68,11 +68,16 @@ const APP = {
       if (!events.length) return false;
 
       const merged = this.mergeApiUpdate(events);
-      merged.timestamp = new Date().toISOString();
-      this.saveToStorage(merged);
+      const mergedJson = JSON.stringify(merged.games);
+      const currentJson = this.data?.games ? JSON.stringify(this.data.games) : '';
+      if (mergedJson !== currentJson) {
+        merged.timestamp = new Date().toISOString();
+        this.saveToStorage(merged);
+        this.processData(merged);
+        this.render();
+      }
+
       localStorage.setItem('wc_last_fetch', String(now));
-      this.processData(merged);
-      this.render();
       return true;
     } catch (e) {
       console.warn('API fetch failed, using cached data');

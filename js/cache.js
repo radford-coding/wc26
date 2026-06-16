@@ -1,7 +1,5 @@
-// World Cup Cache - Generated 2026-06-15 19:14:37 UTC
-// ESPN API - FIFA World Cup 2026
 var WC_CACHE = {
-  "timestamp": "2026-06-16T02:14:37.966480+00:00",
+  "timestamp": "2026-06-15T22:11:41.503306+00:00",
   "teams": {
     "ALG": {
       "id": "624",
@@ -1171,16 +1169,16 @@ var WC_CACHE = {
       "group": "FIFA World Cup, Group H",
       "venue": "Hard Rock Stadium",
       "status": {
-        "name": "STATUS_FULL_TIME",
-        "description": "Full Time",
-        "detail": "FT",
-        "state": "post"
+        "name": "STATUS_FIRST_HALF",
+        "description": "First Half",
+        "detail": "7'",
+        "state": "in"
       },
       "competitors": [
         {
           "id": "655",
           "homeAway": "home",
-          "score": "1",
+          "score": "0",
           "winner": false,
           "team": {
             "id": "655",
@@ -1194,7 +1192,7 @@ var WC_CACHE = {
         {
           "id": "212",
           "homeAway": "away",
-          "score": "1",
+          "score": "0",
           "winner": false,
           "team": {
             "id": "212",
@@ -1221,16 +1219,16 @@ var WC_CACHE = {
       "group": "FIFA World Cup, Group G",
       "venue": "SoFi Stadium",
       "status": {
-        "name": "STATUS_IN_PROGRESS",
-        "description": "In Progress",
-        "detail": "47'",
-        "state": "in"
+        "name": "STATUS_SCHEDULED",
+        "description": "Scheduled",
+        "detail": "Mon, June 15th at 9:00 PM EDT",
+        "state": "pre"
       },
       "competitors": [
         {
           "id": "469",
           "homeAway": "home",
-          "score": "1",
+          "score": "0",
           "winner": false,
           "team": {
             "id": "469",
@@ -1244,7 +1242,7 @@ var WC_CACHE = {
         {
           "id": "2666",
           "homeAway": "away",
-          "score": "1",
+          "score": "0",
           "winner": false,
           "team": {
             "id": "2666",
