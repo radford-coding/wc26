@@ -733,8 +733,13 @@ nav a.active {
   .controls select, .controls input[type="date"] { width: 100%; }
   .standings-table { font-size: 0.82rem; }
   .standings-table th, .standings-table td { padding: 8px 6px; }
-  .schedule-item { flex-wrap: wrap; }
-  .schedule-item .schedule-date { min-width: 80px; }
+  .schedule-item { flex-wrap: wrap; gap: 8px; padding: 10px; }
+  .schedule-item .schedule-date { order: 1; min-width: 0; }
+  .schedule-item .schedule-status { order: 2; flex: 1; min-width: 0; text-align: left; }
+  .schedule-item .schedule-score { order: 3; }
+  .schedule-item .schedule-teams { order: 4; width: 100%; flex-wrap: wrap; }
+  .schedule-item .schedule-teams .team-block { flex: 1; min-width: 0; }
+  .schedule-item .schedule-teams .team-name { white-space: normal; overflow-wrap: break-word; }
   .group-table td { padding: 8px; font-size: 0.82rem; }
   .group-table th { padding: 8px; }
   .bracket-match { flex-wrap: wrap; }

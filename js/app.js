@@ -60,11 +60,15 @@ const APP = {
     }
 
     try {
+      const fetchDate = (d) => {
+        const ds = d.toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
+        return fetch(CONFIG.apiEndpoint + '?dates=' + ds).then(r => r.json());
+      };
       const today = new Date();
-      const dateStr = today.toISOString().slice(0, 10).replace(/-/g, '');
-      const resp = await fetch(CONFIG.apiEndpoint + '?dates=' + dateStr);
-      const d = await resp.json();
-      const events = d.events || [];
+      const yesterday = new Date(today); yesterday.setDate(yesterday.getDate() - 1);
+      const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
+      const results = await Promise.all([fetchDate(yesterday), fetchDate(today), fetchDate(tomorrow)]);
+      const events = results.flatMap(r => r.events || []);
       if (!events.length) return false;
 
       const merged = this.mergeApiUpdate(events);
@@ -76,7 +80,7 @@ const APP = {
         this.processData(merged);
         this.render();
       }
-      localStorage.setItem('wc_last_fetch', String(now));
+      localStorage.setItem('wc_last_fetch', String(Date.now()));
       this.updateStatusBar();
       console.log("success!");
       return true;
